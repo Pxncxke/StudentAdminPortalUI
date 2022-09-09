@@ -12,10 +12,10 @@ padding: 16px 0;
 margin: 0;
 }
 
-.m1-1{
-margin-left: 1em;
+.ml-1{
+margin-left: 1em !important;
 }
 
 .mt-1{
-margin-top: 1em;
+margin-top: 1em !important;
 }
