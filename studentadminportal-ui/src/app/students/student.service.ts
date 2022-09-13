@@ -4,12 +4,13 @@ import { Observable } from 'rxjs';
 import { Student } from '../models/api-models/student.model';
 import { UpdateStudentRequest } from '../models/api-models/update-student-request.model';
 import { AddStudentRequest } from '../models/api-models/add-student-request.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StudentService {
-private baseApiUrl = 'https://localhost:7070';
+private baseApiUrl = environment.baseApiUrl;
   constructor(private httpClient : HttpClient) { }
 
   getStudents():Observable<Student[]>{
@@ -57,5 +58,16 @@ private baseApiUrl = 'https://localhost:7070';
 
   }
 
+  uploadImage(studentId: string, file: File): Observable<any>{
+const formdate = new FormData();
+formdate.append("profileImage", file);
 
+return this.httpClient.post(this.baseApiUrl + '/students/' + studentId + '/upload-image',
+formdate,{ responseType: 'text'});
+  }
+
+  getImagePath(relativePath: string){
+    // // return '${this.baseApiUrl}/${relativePath}';
+    return `${this.baseApiUrl}/${relativePath}`;
+  }
 }
